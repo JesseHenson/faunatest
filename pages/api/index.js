@@ -1,7 +1,7 @@
 const faunadb = require('faunadb')
 
 // your secret hash
-const secret = process.env.FAUNADB_SECRET_KEY
+const secret = 'fnADvdhmCFACDBjfW0jtlK6NXgHaFlGC8m7RF771'
 console.log(secret)
 const q = faunadb.query
 const client = new faunadb.Client({ secret })
@@ -22,6 +22,7 @@ module.exports = async (req, res) => {
             )
         )
         // ok
+        console.log(dbs)
         res.status(200).json(dbs.data)
     } catch (e) {
         // something went wrong
