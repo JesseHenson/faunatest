@@ -1,0 +1,5 @@
+{
+    "env": {
+        "FAUNADB_SECRET_KEY": "fnADvdhmCFACDBjfW0jtlK6NXgHaFlGC8m7RF771"
+    }
+}
