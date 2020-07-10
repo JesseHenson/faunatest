@@ -2,7 +2,7 @@ import faunadb from "faunadb";
 import auth0 from "../../utils/auth0";
 
 // your secret hash
-const secret = "fnADvdhmCFACDBjfW0jtlK6NXgHaFlGC8m7RF771";
+const secret = "fnADviZuanACCLa2ZelLzoN8jyIQm6NxH-tquSrk";
 // const secret = process.env.FAUNADB_SECRET_KEY
 console.log(secret);
 const q = faunadb.query;
@@ -12,6 +12,7 @@ export default async function (req, res) {
   try {
     const tokenCache = await auth0.tokenCache(req, res);
     const { accessToken } = await tokenCache.getAccessToken();
+
     const dbs = await client.query(
       q.Map(
         // iterate each item in result
@@ -19,7 +20,7 @@ export default async function (req, res) {
           // make paginatable
           q.Match(
             // query index
-            q.Index("all_customers") // specify source
+            q.Index("allEmployees") // specify source
           )
         ),
         (ref) => q.Get(ref) // lookup each result by its reference

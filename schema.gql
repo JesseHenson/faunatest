@@ -1,0 +1,75 @@
+type Client {
+    id: ID!
+    name: String
+    charges: [Charge] @relation
+    employees: [Employee] @relation
+}
+
+type Charge {
+    id: ID!
+    taxType: TaxType
+    name: String
+    billingAmt: Float
+    liabilityAmt: Float
+    client: Client
+}
+
+enum TaxType {
+    SUTA
+    WC
+    FUTA
+    FICA
+}
+
+type Employee {
+    id: ID!
+    fname: String
+    lname: String
+    taxPercent: Float
+    client: Client
+    deductions: [Deduction] @relation
+    benefits: [Benefit] @relation
+}
+
+type Deduction {
+    id: ID!
+    name: String
+    dedAmt: Float
+    employee: Employee
+}
+
+type Benefit {
+    id: ID!
+    name: String
+    benAmt: Float
+    employee: Employee
+}
+
+type Query {
+    allClients: [Client!]
+    allEmployees: [Employee!]
+}
+
+type TimeSheet {
+    periodStart: Date
+    periodEnd: Date
+    checkDate: Date
+    payEntries: [PayEntry] @relation
+}
+
+type PayEntry {
+    employee: Employee
+    department: String
+    payCodeRecords: [PayCodeRecord] @relation
+    timeSheet: TimeSheet
+}
+
+type PayCodeRecord {
+    paycode: String
+    amount: Float
+    rate: Float
+    hours: Float
+    payEntry: PayEntry
+}
+
+
